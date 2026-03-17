@@ -12,6 +12,9 @@ class Triangle:
         P=self.perimeter()/2
         s=(P*(P-self.a)*(P-self.b)*(P-self.c))**(0.5)
         return s
+    def __str__(self):
+        return f"Triangle: {self.a, self.b, self.c}, Perimeter: {self.perimeter()}, Area: {self.area()}"
+
 class Rectangle:
     def __init__(self, a, b):
         assert a>0 and b>0
@@ -21,27 +24,37 @@ class Rectangle:
         return 2*(self.a+self.b)
     def area(self):
         return self.a*self.b
+    def __str__(self):
+        return f"Rectangle: {self.a, self.b}, Perimeter: {self.perimeter()}, Area: {self.area()}"
+
 class Circle:
     def __init__(self, r):
         assert r>0
         self.r=r
-    def length(self):
+    def perimeter(self):
         return 2*self.r*3.14
     def area(self):
         return 3.14*self.r*self.r
+    def __str__(self):
+        return f"Circle: {self.r}, Perimeter: {self.perimeter()}, Area: {self.area()}"
+
 class Parallelogram:
     def __init__(self, a, b, c):
-        assert a>0 and b>0 and c>0 and c<b # c - висота, проведена до а
-        self.a=a
-        self.b=b
-        self.c=c
+       assert a>0 and b>0 and c>0 and c<b # c - висота, проведена до а
+       self.a=a
+       self.b=b
+       self.c=c
     def perimeter(self):
          return 2*(self.a+self.b)
     def area(self):
          return self.a*self.c
+    def __str__(self):
+        return f"Parallelogram: {self.a, self.b, self.c}, Perimeter: {self.perimeter()}, Area: {self.area()}"
+
 class Trapeze:
     def __init__(self, a, b, c, d):
         assert a>0 and b>0 and c>0 and d>0
+        assert a!=b
         self.a=a
         self.b=b
         self.c=c
@@ -49,116 +62,52 @@ class Trapeze:
     def perimeter(self):
         return self.a+self.b+self.c+self.d
     def area(self):
-        sp=(self.a+self.b)*((self.a+self.b-self.c+self.d)*(self.a+self.b+self.c-self.d)*(self.a-self.b+self.c+self.d)*(self.a-self.b+self.c-self.d))**(0.5)/4*(self.a-self.b)
+        assert (self.a+self.b-self.c+self.d)*(self.a+self.b+self.c-self.d)*(self.a-self.b+self.c+self.d)*(self.a-self.b+self.c-self.d)>0
+        sp=(self.a+self.b)*((self.a+self.b-self.c+self.d)*(self.a+self.b+self.c-self.d)*(self.a-self.b+self.c+self.d)*(self.a-self.b+self.c-self.d))**(0.5)/(4*(self.a-self.b))
         return sp
+    def __str__(self):
+        return f"Trapeze: {self.a, self.b, self.c, self.d}, Perimeter: {self.perimeter()}, Area: {self.area()}"
 
-smax1=0
-pmax1=0
-name1=" "
-k1=0
-with open("input01.txt", 'r') as f:
-    lines=f.readlines()
-    for l in lines:
-        d=l.split()
-        try:
-            if d[0]=='Triangle':
-                t=Triangle(int(d[1]), int(d[2]), int(d[3]))
-                p=t.perimeter()
-                s=t.area()
-            if d[0]=='Rectangle':
-                t=Rectangle(int(d[1]), int(d[2]))
-                p=t.perimeter()
-                s=t.area()
-            if d[0]=='Circle':
-                t=Circle(int(d[1]))
-                p=t.length()
-                s=t.area()
-            if d[0]=='Parallelogram':
-                t=Parallelogram(int(d[1]), int(d[2]), int(d[3]))
-                p=t.perimeter()
-                s=t.area()
-            if d[0]=='Trapeze':
-                t=Trapeze(int(d[1]), int(d[2]), int(d[3]), int(d[4]))
-                p=t.perimeter()
-                s=t.area()
-            if type(s) != complex:
-                if int(s) > int(smax1) and p>pmax1:
-                    name1=d[0]
-                    k1=t
-        except AssertionError:
-            pass
-smax2=0
-pmax2=0
-k2=0
-name2=" "
-with (open("input02.txt", 'r') as f):
-    lines=f.readlines()
-    for l in lines:
-        d=l.split()
-        try:
-            if d[0]=='Triangle':
-                t=Triangle(int(d[1]), int(d[2]), int(d[3]))
-                p=t.perimeter()
-                s=t.area()
-            if d[0]=='Rectangle':
-                t =Rectangle(int(d[1]), int(d[2]))
-                p=t.perimeter()
-                s=t.area()
-            if d[0]=='Circle':
-                t=Circle(int(d[1]))
-                p=t.length()
-                s=t.area()
-            if d[0]=='Parallelogram':
-                t=Parallelogram(int(d[1]), int(d[2]), int(d[3]))
-                p=t.perimeter()
-                s=t.area()
-            if d[0]=='Trapeze':
-                t=Trapeze(int(d[1]), int(d[2]), int(d[3]), int(d[4]))
-                p=t.perimeter()
-                s=t.area()
-            if type(s) != complex:
-                if int(s) > int(smax2) and int(p)>int(pmax2):
-                    name2=d[0]
-                    k2=t
-        except AssertionError:
-            continue
+def find_max(filename):
+    smax = 0
+    pmax = 0
+    k = 0
+    with open(filename, 'r') as f:
+        lines=f.readlines()
+        for l in lines:
+            d=l.split()
+            try:
+                if d[0]=='Triangle':
+                    t=Triangle(int(d[1]), int(d[2]), int(d[3]))
+                    p=t.perimeter()
+                    s=t.area()
+                if d[0]=='Rectangle':
+                    t=Rectangle(int(d[1]), int(d[2]))
+                    p=t.perimeter()
+                    s=t.area()
+                if d[0]=='Circle':
+                    t=Circle(int(d[1]))
+                    p=t.perimeter()
+                    s=t.area()
+                if d[0]=='Parallelogram':
+                    t=Parallelogram(int(d[1]), int(d[2]), int(d[3]))
+                    p=t.perimeter()
+                    s=t.area()
+                if d[0]=='Trapeze':
+                    t=Trapeze(int(d[1]), int(d[2]), int(d[3]), int(d[4]))
+                    p=t.perimeter()
+                    s=t.area()
+                if s> smax and p>pmax:
+                    k=t
+                    smax=s
+                    pmax=p
+            except AssertionError:
+                pass
+    return k
 
-smax3=0
-pmax3=0
-name3=" "
-k3=0
-with open("input03.txt", 'r') as f:
-    lines=f.readlines()
-    for l in lines:
-        d=l.split()
-        try:
-            if d[0]=='Triangle':
-                t=Triangle(int(d[1]), int(d[2]), int(d[3]))
-                p=t.perimeter()
-                s=t.area()
-            if d[0]=='Rectangle':
-                t=Rectangle(int(d[1]), int(d[2]))
-                p=t.perimeter()
-                s=t.area()
-            if d[0]=='Circle':
-                t=Circle(int(d[1]))
-                p=t.length()
-                s=t.area()
-            if d[0]=='Parallelogram':
-                t=Parallelogram(int(d[1]), int(d[2]), int(d[3]))
-                p=t.perimeter()
-                s=t.area()
-            if d[0]=='Trapeze':
-                t=Trapeze(int(d[1]), int(d[2]), int(d[3]), int(d[4]))
-                p=t.perimeter()
-                s=t.area()
-            if type(s) != complex:
-                if int(s)>int(smax3) and int(p)>int(pmax3):
-                    name3=d[0]
-                    k3=t
-        except AssertionError:
-            continue
-# якщо трапеція то виведе лише перші три сторони
-print("in input01.txt the biggest area and perimeter: ", name1, k1.a, k1.b, k1.c)
-print("in input02.txt the biggest area and perimeter: ", name2, k2.a, k2.b, k2.c)
-print("in input03.txt the biggest area and perimeter: ", name3, k3.a, k3.b, k3.c)
+t1=find_max('input01.txt')
+t2=find_max('input02.txt')
+t3=find_max('input03.txt')
+print("input01.txt: ", t1)
+print("input02.txt: ", t2)
+print("input03.txt: ", t3)
