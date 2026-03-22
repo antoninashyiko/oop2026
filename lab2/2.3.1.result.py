@@ -69,7 +69,6 @@ class leaf:
         angle = math.degrees(math.atan2(y2 - y1, x2 - x1))
         t.goto(cx, cy)
         t.setheading(angle+180)
-        t.up()
         t.goto(cx, cy)
         t.down()
         t.begin_fill()
