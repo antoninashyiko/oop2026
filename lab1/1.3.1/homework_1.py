@@ -53,7 +53,7 @@ class Parallelogram:
 
 class Trapeze:
     def __init__(self, a, b, c, d):
-        assert a>0 and b>0 and c>0 and d>0
+        assert a>0 and b>0 and c>0 and d>0 and (a+b-c+d)*(a+b+c-d)*(a-b+c+d)*(a-b+c-d)>0
         assert a!=b
         self.a=a
         self.b=b
@@ -62,7 +62,6 @@ class Trapeze:
     def perimeter(self):
         return self.a+self.b+self.c+self.d
     def area(self):
-        assert (self.a+self.b-self.c+self.d)*(self.a+self.b+self.c-self.d)*(self.a-self.b+self.c+self.d)*(self.a-self.b+self.c-self.d)>0
         sp=(self.a+self.b)*((self.a+self.b-self.c+self.d)*(self.a+self.b+self.c-self.d)*(self.a-self.b+self.c+self.d)*(self.a-self.b+self.c-self.d))**(0.5)/(4*(self.a-self.b))
         return sp
     def __str__(self):
