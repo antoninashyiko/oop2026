@@ -1,42 +1,25 @@
 import math as m
 class Figure:
-    def __init__(self, a, b, c, d):
-        self.a = a
-        self.b = b
-        self.c = c
-        self.d = d
+    def perimeter(self):
+        raise NotImplementedError()
+    def area(self):
+        raise NotImplementedError()
+    def volume1(self):
+        raise NotImplementedError()
+    def squareSurface(self):
+        raise NotImplementedError()
+    def squareBase(self):
+        raise NotImplementedError()
+    def height(self):
+        raise NotImplementedError()
+    def volume(self):
+        raise NotImplementedError()
 class Two_d(Figure):
     def dimention(self):
         return "two dimensional"
-    def perimeter(self):
-        return 1
-    def area(self):
-        return 2
-    def volume1(self):
-        return 2
-    def squareSurface(self):
-        return None
-    def squareBase(self):
-        return None
-    def height(self):
-        return None
-    def volume(self):
-        return None
 class Three_d(Figure):
     def dimention(self):
         return "three dimensional"
-    def perimeter(self):
-        return None
-    def area(self):
-        return None
-    def squareSurface(self):
-        return 1
-    def squareBase(self):
-        return 2
-    def height(self):
-        return self.a #come back to edit!!!
-    def volume(self):
-        return 3
 class Triangle(Two_d):
     def __init__(self, a, b, c):
         assert a + b > c and a + c > b and c + b > a
@@ -119,7 +102,7 @@ class Ball(Three_d):
         return sb
     def __str__(self):
         return f"Ball: {self.a}, Volume: {self.volume()}"
-class TriangularPyramid(Triangle, Three_d):
+class TriangularPyramid(Three_d):
     def __init__(self, a, h):
         assert a > 0 and h>0
         self.a = a
@@ -128,11 +111,11 @@ class TriangularPyramid(Triangle, Three_d):
         s=m.sqrt(3) * self.a ** 2
         return s
     def volume(self): #обʼєм
-        v=(m.sqrt(2)*self.a**3)/12
+        v=(self.h*self.a**2)/(4*m.sqrt(3))
         return v
     def __str__(self):
         return f"TriangularPyramid: {self.a, self.h}, Volume: {self.volume()}"
-class QuadrangularPyramid(Rectangle, Three_d):
+class QuadrangularPyramid(Three_d):
     def __init__(self, a, b, h):
         assert a > 0 and b>0 and h > 0
         self.a = a
@@ -149,7 +132,7 @@ class QuadrangularPyramid(Rectangle, Three_d):
         return v
     def __str__(self):
         return f"QuadrangularPyramid: {self.a, self.b, self.h}, Volume: {self.volume()}"
-class RectangularParallelepiped(Rectangle, Three_d):
+class RectangularParallelepiped(Three_d):
     def __init__(self, a, b, c):
         assert a > 0 and b > 0 and c > 0
         self.a = a
@@ -163,8 +146,8 @@ class RectangularParallelepiped(Rectangle, Three_d):
         return v
     def __str__(self):
         return f"RectangularParallelepiped: {self.a, self.b, self.c}, Volume: {self.volume()}"
-class Cone(Circle, Three_d):
-    def __init__(self, r, h):
+class Cone(Three_d):
+    def __init__ (self, r, h):
         assert r > 0 and h > 0
         self.r = r
         self.h = h
@@ -177,7 +160,7 @@ class Cone(Circle, Three_d):
         return v
     def __str__(self):
         return f"Cone: {self.r, self.h}, Volume: {self.volume()}"
-class TriangularPrism(Triangle, Three_d):
+class TriangularPrism(Three_d):
     def __init__(self, a, b, c, h):
         assert a > 0 and b > 0 and c>0 and h > 0
         assert a + b > c and a + c > b and b + c > a
