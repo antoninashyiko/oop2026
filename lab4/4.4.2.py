@@ -86,18 +86,94 @@ print(" ")
 g=Game_field()
 g.show()
 
+b=[[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+n=0
+def fill_board(x, y):
+    global k, b
+    if -300<x<-100 and -150<y<50:
+        if k=="circles":
+            b[0][0]=1
+        else:
+            b[0][0]=2
+    elif -300<x<-100 and -350<y<-150:
+        if k == "circles":
+            b[0][1] = 1
+        else:
+            b[0][1] = 2
+    elif -300<x<-100 and -550<y<-350:
+        if k == "circles":
+            b[0][2] = 1
+        else:
+            b[0][2] = 2
+    elif -100<x<100 and -150<y<50:
+        if k == "circles":
+            b[1][0] = 1
+        else:
+            b[1][0] = 2
+    elif -100<x<100 and -350<y<-150:
+        if k == "circles":
+            b[1][1] = 1
+        else:
+            b[1][1] = 2
+    elif -100<x<100 and -550<y<-350:
+        if k == "circles":
+            b[1][2] = 1
+        else:
+            b[1][2] = 2
+    elif 100<x<300 and -150<y<50:
+        if k == "circles":
+            b[2][0] = 1
+        else:
+            b[2][0] = 2
+    elif 100<x<300 and -350<y<-150:
+        if k == "circles":
+            b[2][1] = 1
+        else:
+            b[2][1] = 2
+    elif 100<x<300 and -550<y<-350:
+        if k == "circles":
+            b[2][2] = 1
+        else:
+            b[2][2] = 2
+    return b
 def click(x, y):
-    global k
+    global k, b, n
+    b=fill_board(x, y)
+    win=False
     if k=="circles":
         f=Circle(x, y)
         f.show()
         k="crosses"
+        n+=1
     elif k=="crosses":
         f=Cross(x, y)
         f.show()
         k="circles"
+        n+=1
     else:
         print("input circles or crosses to start the game: ")
+
+    for i in range(3):
+        if b[i][0] == b[i][1] == b[i][2] != 0:
+            win = True
+    for i in range(3):
+        if b[0][i] == b[1][i] == b[2][i] != 0:
+            win = True
+    if b[0][0] == b[1][1] == b[2][2] != 0:
+        win = True
+    if b[2][0] == b[1][1] == b[0][2] != 0:
+        win = True
+    if win:
+        t.ontimer(t.bye, 3000)
+        print("game over")
+        if k=="circles":
+            print("crosses won")
+        else:
+            print("circles won")
+    if n==9 and not win:
+        t.ontimer(t.bye, 3000)
+        print("game over")
+        print("it's a tie")
 
 t.onscreenclick(click)
 t.mainloop()
