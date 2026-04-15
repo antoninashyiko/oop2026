@@ -90,47 +90,48 @@ b=[[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 n=0
 def fill_board(x, y):
     global k, b
-    if -300<x<-100 and -150<y<50:
+    print(f"{k}: click [{x}, {y}]") # виведення координат ходів
+    if -300<x<-100 and 100<y<300:
         if k=="circles":
             b[0][0]=1
         else:
             b[0][0]=2
-    elif -300<x<-100 and -350<y<-150:
-        if k == "circles":
-            b[0][1] = 1
-        else:
-            b[0][1] = 2
-    elif -300<x<-100 and -550<y<-350:
-        if k == "circles":
-            b[0][2] = 1
-        else:
-            b[0][2] = 2
-    elif -100<x<100 and -150<y<50:
+    elif -300<x<-100 and -100<y<100:
         if k == "circles":
             b[1][0] = 1
         else:
             b[1][0] = 2
-    elif -100<x<100 and -350<y<-150:
-        if k == "circles":
-            b[1][1] = 1
-        else:
-            b[1][1] = 2
-    elif -100<x<100 and -550<y<-350:
-        if k == "circles":
-            b[1][2] = 1
-        else:
-            b[1][2] = 2
-    elif 100<x<300 and -150<y<50:
+    elif -300<x<-100 and -300<y<-100:
         if k == "circles":
             b[2][0] = 1
         else:
             b[2][0] = 2
-    elif 100<x<300 and -350<y<-150:
+    elif -100<x<100 and 100<y<300:
+        if k == "circles":
+            b[0][1] = 1
+        else:
+            b[0][1] = 2
+    elif -100<x<100 and -100<y<100:
+        if k == "circles":
+            b[1][1] = 1
+        else:
+            b[1][1] = 2
+    elif -100<x<100 and -300<y<-100:
         if k == "circles":
             b[2][1] = 1
         else:
             b[2][1] = 2
-    elif 100<x<300 and -550<y<-350:
+    elif 100<x<300 and 100<y<300:
+        if k == "circles":
+            b[0][2] = 1
+        else:
+            b[0][2] = 2
+    elif 100<x<300 and -100<y<100:
+        if k == "circles":
+            b[1][2] = 1
+        else:
+            b[1][2] = 2
+    elif 100<x<300 and -300<y<-100:
         if k == "circles":
             b[2][2] = 1
         else:
@@ -140,6 +141,7 @@ def click(x, y):
     global k, b, n
     b=fill_board(x, y)
     win=False
+    p=k
     if k=="circles":
         f=Circle(x, y)
         f.show()
@@ -164,12 +166,12 @@ def click(x, y):
     if b[2][0] == b[1][1] == b[0][2] != 0:
         win = True
     if win:
-        t.ontimer(t.bye, 3000)
+        t.ontimer(t.bye, 2000)
         print("game over")
-        if k=="circles":
-            print("crosses won")
-        else:
+        if p=="circles":
             print("circles won")
+        else:
+            print("crosses won")
     if n==9 and not win:
         t.ontimer(t.bye, 3000)
         print("game over")
