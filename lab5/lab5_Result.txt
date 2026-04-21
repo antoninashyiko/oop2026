@@ -1,0 +1,7 @@
+input01.txt number: 12723/616
+ 
+input02.txt number: 2614240938893/26771144400
+ 
+input03.txt number: -40375298199527/13385572200
+
+Process finished with exit code 0
