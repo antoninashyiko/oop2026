@@ -1,9 +1,10 @@
 class Rational:
     def __init__(self, n, d):
-        assert d!=0
         self.n = int(n)
         self.d = int(d)
         self.symplyfication()
+        if self.d==0:
+            raise RationalError()
     def nsd(self, a, b):
         if b > a:
             a, b = b, a
@@ -82,7 +83,7 @@ def func(filename):
                         a+=num
                 except TypeError:
                     pass
-                except AssertionError:
+                except RationalError:
                     print(RationalError())
         return a
 def sum_lst(lst):
