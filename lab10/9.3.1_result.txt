@@ -1,0 +1,31 @@
+/usr/local/bin/python3.13 /Users/chocolatechip/PycharmProjects/PythonClassProjects/homework_sem_2/homework10/9.3.1.py 
+input01.txt
+humanitarian, money: 350609, credits: 834, status: in school , graduated
+input02.txt
+natural-humanitarian, money: 322399, credits: 1910, status: in school , graduated
+input03.txt
+natural, money: 295893, credits: 870, status: in school , graduated
+input04.txt
+natural-humanitarian, money: 307761, credits: 1867, status: in school , graduated
+input05.txt
+natural, money: 287927, credits: 770, status: in school , graduated
+input06.txt
+natural, money: 322292, credits: 982, status: in school , graduated
+input07.txt
+humanitarian, money: 276412, credits: 857, status: in school , graduated
+input08.txt
+humanitarian, money: 294044, credits: 901, status: in school , graduated
+input09.txt
+natural-humanitarian, money: 292370, credits: 1770, status: in school , graduated
+input10.txt
+natural-humanitarian, money: 327828, credits: 1858, status: in school , graduated
+input11.txt
+natural-humanitarian, money: 311038, credits: 1820, status: in school , graduated
+input12.txt
+humanitarian, money: 307974, credits: 775, status: in school , graduated
+input13.txt
+natural, money: 330939, credits: 752, status: in school , graduated
+input14.txt
+natural-humanitarian, money: 306006, credits: 2006, status: in school , graduated
+
+Process finished with exit code 0
