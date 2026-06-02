@@ -72,6 +72,8 @@ def student_file(filename):
         else:
             student = Natural_Humanitarian_student(money)
         for l in lines[3::]:
+            if student.expelled or student.credits >= credits:
+                break
             d=l.strip().split()
             command=d[0]
             if command=="teach":
@@ -89,7 +91,7 @@ def student_file(filename):
                     student.accept(help)
         if student.expelled:
             diploma="no diploma"
-        elif student.credits > credits:
+        elif student.credits >=credits:
             diploma="graduated"
         else:
             diploma="no diploma"
